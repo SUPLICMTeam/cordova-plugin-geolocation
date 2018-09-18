@@ -28,7 +28,6 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
-import com.orhanobut.logger.Logger;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -106,7 +105,6 @@ public class Geolocation extends CordovaPlugin {
                 cbCtx.sendPluginResult(pluginResult);
             } catch (JSONException e) {
                 String errMsg = e.getMessage();
-                Logger.i(LOG_TAG, errMsg, e);
 
                 PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, errMsg);
                 cbCtx.sendPluginResult(pluginResult);
@@ -150,7 +148,6 @@ public class Geolocation extends CordovaPlugin {
             if (r == PackageManager.PERMISSION_DENIED) {
                 JSONObject json = new JSONObject();
                 json.put("describe", "定位失败");
-                Logger.i(LOG_TAG, "权限请求被拒绝");
                 cbCtx.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, json));
                 return;
             }
