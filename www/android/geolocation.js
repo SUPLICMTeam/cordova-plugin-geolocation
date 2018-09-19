@@ -38,7 +38,7 @@ module.exports = {
         //         error(new PositionError(PositionError.PERMISSION_DENIED, 'Illegal Access'));
         //     }
         // };
-        exec(win, fail, 'Geolocation', 'getCurrentPosition', []);
+        exec(success, error, 'Geolocation', 'getCurrentPosition', []);
     },
 
     watchPosition: function (success, error, args) {

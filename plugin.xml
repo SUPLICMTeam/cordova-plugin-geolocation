@@ -122,14 +122,10 @@ under the License.
 			</feature>
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription"  >
-			<string>
-				定位需要该权限
-			</string>
+			<string>定位需要该权限</string>
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-			<string>
-				定位需要该权限
-			</string>
+			<string>定位需要该权限</string>
 		</config-file>
 		<header-file src="src/ios/CDVLocation.h" />
 		<source-file src="src/ios/CDVLocation.m" />

@@ -85,6 +85,7 @@ var geolocation = {
         var timeoutTimer = {timer: null};
 
         var win = function (p) {
+            console.log(2222);
             clearTimeout(timeoutTimer.timer);
             if (!(timeoutTimer.timer)) {
                 // Timeout already happened, or native fired error callback for
@@ -92,6 +93,7 @@ var geolocation = {
                 // Don't continue with success callback.
                 return;
             }
+            console.log(1111);
             if(!p['city']){
                 p['city']="";
             }
@@ -109,7 +111,7 @@ var geolocation = {
             //     new Position(
             //     p.timestamp
             // );
-            geolocation.lastPosition = pos;
+            // geolocation.lastPosition = pos;
             successCallback(pos);
         };
         var fail = function (e) {
