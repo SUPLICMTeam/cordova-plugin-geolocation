@@ -108,6 +108,7 @@ module.exports = {
 
                 loc.getGeopositionAsync().then(
                     function (pos) {
+                        console.log("getLocation==============")
                         success(createResult(pos));
                     },
                     function (err) {

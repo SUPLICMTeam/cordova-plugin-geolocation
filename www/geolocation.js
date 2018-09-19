@@ -93,11 +93,11 @@ var geolocation = {
                 // Don't continue with success callback.
                 return;
             }
-            console.log(1111);
+            console.log(2222);
             if(!p['city']){
                 p['city']="";
             }
-            var pos = 
+            var pos = new Position(
                 {
                     latitude: p.latitude,
                     longitude: p.longitude,
@@ -107,11 +107,10 @@ var geolocation = {
                     velocity: p.velocity,
                     altitudeAccuracy: p.altitudeAccuracy,
                     city:p['city']
-                }
-            //     new Position(
-            //     p.timestamp
-            // );
-            // geolocation.lastPosition = pos;
+                },
+                p.timestamp
+            );
+            geolocation.lastPosition = pos;
             successCallback(pos);
         };
         var fail = function (e) {
