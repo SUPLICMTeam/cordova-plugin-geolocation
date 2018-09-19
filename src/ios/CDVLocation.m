@@ -281,6 +281,8 @@
 - (void)returnLocationInfo:(NSString*)callbackId andKeepCallback:(BOOL)keepCallback
 {
     static CDVPluginResult* result = nil;
+    static NSMutableDictionary* returnInfo=nil;
+    
     CDVLocationData* lData = self.locationData;
     
     if (lData && !lData.locationInfo) {
@@ -288,7 +290,7 @@
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageToErrorObject:POSITIONUNAVAILABLE];
     } else if (lData && lData.locationInfo) {
         CLLocation* lInfo = lData.locationInfo;
-        NSMutableDictionary* returnInfo = [NSMutableDictionary dictionaryWithCapacity:9];
+         returnInfo = [NSMutableDictionary dictionaryWithCapacity:9];
         NSNumber* timestamp = [NSNumber numberWithDouble:([lInfo.timestamp timeIntervalSince1970] * 1000)];
         [returnInfo setObject:timestamp forKey:@"timestamp"];
         [returnInfo setObject:[NSNumber numberWithDouble:lInfo.speed] forKey:@"velocity"];
@@ -304,10 +306,10 @@
         CLLocation *newLocation= lData.locationInfo;
 
         [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-            
+       
             if (placemarks.count > 0) {
                 CLPlacemark *placemark = placemarks[0];
-                
+
                 NSString *city = placemark.locality;
                 if (!city) {
                     city = placemark.administrativeArea;
@@ -318,21 +320,24 @@
                 NSLog(@"country == %@",placemark.country);//中国
                 NSLog(@"administrativeArea == %@",placemark.administrativeArea); //省
                 [returnInfo setObject:city forKey:@"city"];
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnInfo];
-                [result setKeepCallbackAsBool:keepCallback];
+                
             }
             else if (placemarks.count == 0 && error == nil){
                 NSLog(@"没有结果");
             }else if (error != nil){
                 NSLog(@"有错误");
-            }}];
+            }
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnInfo];
+            [result setKeepCallbackAsBool:keepCallback];
+            if (result) {
+                [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+            }
+        }];
      
-        
-      
+
+       
     }
-    if (result) {
-        [self.commandDelegate sendPluginResult:result callbackId:callbackId];
-    }
+  
 }
 
 - (void)returnLocationError:(NSUInteger)errorCode withMessage:(NSString*)message

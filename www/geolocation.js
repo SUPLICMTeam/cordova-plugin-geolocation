@@ -97,7 +97,8 @@ var geolocation = {
             if(!p['city']){
                 p['city']="";
             }
-            var pos = new Position(
+            // new Position(
+            var pos =
                 {
                     latitude: p.latitude,
                     longitude: p.longitude,
@@ -107,9 +108,10 @@ var geolocation = {
                     velocity: p.velocity,
                     altitudeAccuracy: p.altitudeAccuracy,
                     city:p['city']
-                },
-                p.timestamp
-            );
+                }
+            //     ,
+            //     p.timestamp
+            // );
             geolocation.lastPosition = pos;
             successCallback(pos);
         };
