@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <Cordova/CDVPlugin.h>
+#import <MapKit/MapKit.h>
 
 enum CDVLocationStatus {
     PERMISSIONDENIED = 1,

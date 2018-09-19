@@ -45,7 +45,7 @@ public class Geolocation extends CordovaPlugin {
      /**
      * LOG TAG
      */
-    private static final String LOG_TAG = BaiduMapLocation.class.getSimpleName();
+    // private static final String LOG_TAG = BaiduMapLocation.class.getSimpleName();
 
     /**
      * JS回调接口对象

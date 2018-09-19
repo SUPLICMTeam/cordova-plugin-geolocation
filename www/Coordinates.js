@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
 /**
  * This class contains position information.
@@ -28,9 +28,10 @@
  * @param {Object} head
  * @param {Object} vel
  * @param {Object} altacc
+ * @param {Object} city
  * @constructor
  */
-var Coordinates = function (lat, lng, alt, acc, head, vel, altacc) {
+var Coordinates = function (lat, lng, alt, acc, head, vel, altacc, cy) {
     /**
      * The latitude of the position.
      */
@@ -44,6 +45,10 @@ var Coordinates = function (lat, lng, alt, acc, head, vel, altacc) {
      */
     this.accuracy = acc;
     /**
+     * The city of the position.
+     */
+    this.city = cy;
+    /**
      * The altitude of the position.
      */
     this.altitude = (alt !== undefined ? alt : null);
@@ -55,15 +60,16 @@ var Coordinates = function (lat, lng, alt, acc, head, vel, altacc) {
      * The velocity with which the device is moving at the position.
      */
     this.speed = (vel !== undefined ? vel : null);
-
+  
     if (this.speed === 0 || this.speed === null) {
-        this.heading = NaN;
+      this.heading = NaN;
     }
-
+  
     /**
      * The altitude accuracy of the position.
      */
     this.altitudeAccuracy = (altacc !== undefined) ? altacc : null;
-};
-
-module.exports = Coordinates;
+  };
+  
+  module.exports = Coordinates;
+  

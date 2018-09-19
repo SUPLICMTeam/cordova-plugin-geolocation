@@ -280,7 +280,7 @@
 
 - (void)returnLocationInfo:(NSString*)callbackId andKeepCallback:(BOOL)keepCallback
 {
-    CDVPluginResult* result = nil;
+    static CDVPluginResult* result = nil;
     CDVLocationData* lData = self.locationData;
     
     if (lData && !lData.locationInfo) {
@@ -288,7 +288,7 @@
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageToErrorObject:POSITIONUNAVAILABLE];
     } else if (lData && lData.locationInfo) {
         CLLocation* lInfo = lData.locationInfo;
-        NSMutableDictionary* returnInfo = [NSMutableDictionary dictionaryWithCapacity:8];
+        NSMutableDictionary* returnInfo = [NSMutableDictionary dictionaryWithCapacity:9];
         NSNumber* timestamp = [NSNumber numberWithDouble:([lInfo.timestamp timeIntervalSince1970] * 1000)];
         [returnInfo setObject:timestamp forKey:@"timestamp"];
         [returnInfo setObject:[NSNumber numberWithDouble:lInfo.speed] forKey:@"velocity"];
@@ -299,8 +299,36 @@
         [returnInfo setObject:[NSNumber numberWithDouble:lInfo.coordinate.latitude] forKey:@"latitude"];
         [returnInfo setObject:[NSNumber numberWithDouble:lInfo.coordinate.longitude] forKey:@"longitude"];
         
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnInfo];
-        [result setKeepCallbackAsBool:keepCallback];
+        // 获取当前所在的城市名
+        CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+        CLLocation *newLocation= lData.locationInfo;
+
+        [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+            
+            if (placemarks.count > 0) {
+                CLPlacemark *placemark = placemarks[0];
+                
+                NSString *city = placemark.locality;
+                if (!city) {
+                    city = placemark.administrativeArea;
+                }
+                NSLog(@"city = %@", city);//城市名
+                NSLog(@"--%@",placemark.name);//街名
+                NSLog(@"++++%@",placemark.subLocality); //区（海淀）
+                NSLog(@"country == %@",placemark.country);//中国
+                NSLog(@"administrativeArea == %@",placemark.administrativeArea); //省
+                [returnInfo setObject:city forKey:@"city"];
+                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnInfo];
+                [result setKeepCallbackAsBool:keepCallback];
+            }
+            else if (placemarks.count == 0 && error == nil){
+                NSLog(@"没有结果");
+            }else if (error != nil){
+                NSLog(@"有错误");
+            }}];
+     
+        
+      
     }
     if (result) {
         [self.commandDelegate sendPluginResult:result callbackId:callbackId];
