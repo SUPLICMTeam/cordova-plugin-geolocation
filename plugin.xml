@@ -121,18 +121,18 @@ under the License.
 				<param name="ios-package" value="CDVLocation" />
 			</feature>
 		</config-file>
-		<config-file target="*-Info.plist ">
+		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
 			<key>
-				NSLocationWhenInUseUsageDescription
+				NSLocationAlwaysUsageDescription
 			</key>
-			<string>
+			<value>
 				需要定位
-			</string>
+			</value>
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-			<string>
+			<value>
 				需要定位
-			</string>
+			</value>
 		</config-file>
 		<header-file src="src/ios/CDVLocation.h" />
 		<source-file src="src/ios/CDVLocation.m" />
