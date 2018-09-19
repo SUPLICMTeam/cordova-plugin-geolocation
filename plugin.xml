@@ -121,7 +121,7 @@ under the License.
 				<param name="ios-package" value="CDVLocation" />
 			</feature>
 		</config-file>
-		<config-file target="*-info.plist " parent="NSLocationWhenInUseUsageDescription">
+		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
 			<array>
 				<dict>
 					<key>
