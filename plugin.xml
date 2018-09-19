@@ -131,7 +131,7 @@ under the License.
 					</string>
 				</dict>
 		</config-file>
-		<config-file target="*-info.plist " parent="NSLocationWhenInUseUsageDescription"  string="需要定位">
+		<config-file target="*-Info.plist " parent="NSLocationWhenInUseUsageDescription"  string="需要定位">
 			
 		</config-file>
 		<header-file src="src/ios/CDVLocation.h" />
