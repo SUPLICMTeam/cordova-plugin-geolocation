@@ -123,16 +123,13 @@ under the License.
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
 			<key>
-				NSLocationAlwaysUsageDescription
-			</key>
-			<value>
 				需要定位
-			</value>
+			</key>
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-			<value>
+		<key>
 				需要定位
-			</value>
+			</key>
 		</config-file>
 		<header-file src="src/ios/CDVLocation.h" />
 		<source-file src="src/ios/CDVLocation.m" />
