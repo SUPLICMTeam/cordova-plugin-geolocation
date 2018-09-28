@@ -320,6 +320,7 @@
                 NSLog(@"country == %@",placemark.country);//中国
                 NSLog(@"administrativeArea == %@",placemark.administrativeArea); //省
                 [returnInfo setObject:city forKey:@"city"];
+                [returnInfo setObject:placemark.subLocality forKey:@"district"];
                 
             }
             else if (placemarks.count == 0 && error == nil){

@@ -97,6 +97,9 @@ var geolocation = {
             if(!p['city']){
                 p['city']="";
             }
+            if(!p['district']){
+                p['district']="";
+            }
             // new Position(
             var pos =
                 {
@@ -107,7 +110,8 @@ var geolocation = {
                     heading: p.heading,
                     velocity: p.velocity,
                     altitudeAccuracy: p.altitudeAccuracy,
-                    city:p['city']
+                    city:p['city'],
+                    district:p['district']
                 }
             //     ,
             //     p.timestamp
